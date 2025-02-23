@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <!-- 系统介绍 -->
+    <!-- 系统介绍
     <span class="page-title" style="margin-top: 30px;">系统介绍</span>
     <hr style="border-top: 1px solid #cdcdcd; margin-top: 5px;">
     <p style="text-align: justify; text-indent: 2em; margin-top: 20px; font-size: 18px;">
@@ -106,6 +106,7 @@
     <p style="text-align: justify; text-indent: 2em; font-size: 18px; color: #ef4848;">
       【注意】：系统在出题或判题时切换页面，或执行答题外的其它操作，可能导致出题页面正在执行的任务被打断，此时重新出题或提交，任务将重头开始。
     </p>
+     -->
     <!-- 空白区域 -->
     <div class="space" style="height: 200px;"></div>
 

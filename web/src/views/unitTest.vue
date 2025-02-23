@@ -635,6 +635,8 @@ const generateQuestions = async () => {
 const generate = () => {
   // 清除原来生成的题目
   clearQuestionList();
+  // 清空评论
+  clearCommentList();
   // 更新出题次数
   addIndexApi({'username': userStore.user_name, 'question_type': '单元测试'}).then(() => {
     // 获取出题次数
