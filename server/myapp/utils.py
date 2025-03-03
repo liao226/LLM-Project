@@ -149,9 +149,14 @@ def get_response(prompt):
     client = OpenAI(api_key="sk-rzaxizbdkgiavgsvfrwleuhfmeiaqtmwmnerqlqheowvwknd",
                     base_url="https://api.siliconflow.cn/v1")
 
+    # deepseek
+    # client = OpenAI(api_key="sk-8536ff89b03c465b9538706bff34104f",
+    #                base_url="https://api.deepseek.com")
+
     # 发送聊天请求
     response = client.chat.completions.create(
         model='deepseek-ai/DeepSeek-V2.5',
+        # model='deepseek-reasoner',
         messages=[
             {'role': 'user',
              'content': prompt}
@@ -195,6 +200,10 @@ def get_question_comment(question, solution, user_answer, comment):
     client = OpenAI(api_key="sk-rzaxizbdkgiavgsvfrwleuhfmeiaqtmwmnerqlqheowvwknd",
                     base_url="https://api.siliconflow.cn/v1")
 
+    # deepseek
+    # client = OpenAI(api_key="sk-8536ff89b03c465b9538706bff34104f",
+    #                base_url="https://api.deepseek.com")
+
     prompt = (
         f'有一道数学题，题目为{question}，该题记录的答案为{solution}，用户的答案为{user_answer}，题目的解析为{comment}，'
         f'要求返回的结果是一个字典，字典内容包括结合原有的解析，并且在原有解析的基础上进行修正，重新生成的新的解析“comment”，以及一个“flag”标记用户答案是否正确。'
@@ -209,6 +218,7 @@ def get_question_comment(question, solution, user_answer, comment):
     # 发送聊天请求
     response = client.chat.completions.create(
         model='deepseek-ai/DeepSeek-V2.5',
+        # model='deepseek-reasoner',
         messages=[
             {'role': 'user',
              'content': prompt}
@@ -246,6 +256,11 @@ def get_record_comment(total_score, user_score):
     from openai import OpenAI
     client = OpenAI(api_key="sk-rzaxizbdkgiavgsvfrwleuhfmeiaqtmwmnerqlqheowvwknd",
                     base_url="https://api.siliconflow.cn/v1")
+
+    # deepseek
+    # client = OpenAI(api_key="sk-8536ff89b03c465b9538706bff34104f",
+    #                base_url="https://api.deepseek.com")
+
     prompt = (
         f'有一份数学试卷，试卷题目的总分为{total_score}，用户做答的得分为{user_score}。'
         f'要求返回的形式是一个字典，评论对应的键为comment，内容为评论。'
@@ -257,6 +272,7 @@ def get_record_comment(total_score, user_score):
     # 发送聊天请求
     response = client.chat.completions.create(
         model='deepseek-ai/DeepSeek-V2.5',
+        # model='deepseek-reasoner',
         messages=[
             {'role': 'user',
              'content': prompt}
@@ -302,6 +318,10 @@ def get_avatar_message():
     client = OpenAI(api_key="sk-rzaxizbdkgiavgsvfrwleuhfmeiaqtmwmnerqlqheowvwknd",
                     base_url="https://api.siliconflow.cn/v1")
 
+    # deepseek
+    # client = OpenAI(api_key="sk-8536ff89b03c465b9538706bff34104f",
+    #                base_url="https://api.deepseek.com")
+
     prompt = (
         f'有一个场景是用户点击一个网页的头像，该网页没有做头像更换的功能，所以希望可以返回一个调皮一点、活泼一点的信息来进行用户反馈，可以参考下面几句信息：'
         f'[“没有了哦”，“真的没有啦！”，“真的真的没有啦！”，“今天也要开心哦”，“发现你在偷懒咯”，“好好学习，天天向上”，“要生气啦”，'
@@ -314,9 +334,9 @@ def get_avatar_message():
     # 发送聊天请求
     response = client.chat.completions.create(
         model='deepseek-ai/DeepSeek-V2.5',
+        # model='deepseek-reasoner',
         messages=[
-            {'role': 'user',
-             'content': prompt}
+            {'role': 'user', 'content': prompt}
         ],
     )
     data = response.choices[0].message.content
