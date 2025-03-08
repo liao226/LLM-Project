@@ -110,7 +110,7 @@ def read_data(setting, request):
         # print(path)
         with open(path, encoding='utf-8') as file:
             file_data = json.load(file)
-        return path, file_data, file_data['common_topic'], random.sample(file_data['questions'], 10)
+        return path, file_data, file_data['common_topic'], random.sample(file_data['questions'], 5)
     # 综合测试
     else:
         root = os.getcwd() + '/myapp/dataset'
@@ -124,7 +124,7 @@ def read_data(setting, request):
         print(path)
         with open(path, encoding='utf-8') as file:
             file_data = json.load(file)
-        return path, file_data, file_data['common_topic'], random.sample(file_data['questions'], 10)
+        return path, file_data, file_data['common_topic'], random.sample(file_data['questions'], 5)
 
 
 # 将新出的题保存到数据库中
@@ -266,7 +266,7 @@ def get_record_comment(total_score, user_score):
     prompt = (
         f'有一份数学试卷，试卷题目的总分为{total_score}，用户做答的得分为{user_score}。'
         f'要求返回的形式是一个字典，评论对应的键为comment，内容为评论。'
-        f'要求结合试卷总分和用户总分，大致计算出用户答题的准确率，然后在评论中体现出用户答题的准确率，并再生成几句鼓励性的评语，'
+        f'要求结合试卷总分和用户总分，大致计算出用户答题的准确率，然后在评论中体现出用户答题的准确率，并再生成几句鼓励性的评语，评语大概控制在三四句左右，'
         f'鼓励用户继续努力，或者在用户准备率很高（大致准确率达到80%及以上），对用户进行夸奖什么的。'
         f'仅返回一个字典，不需要添加任何额外的文字，也不需要保留任何类似json或python的格式提示字段和说明。'
     )
@@ -327,7 +327,7 @@ def get_avatar_message():
 
     prompt = (
         f'有一个场景是用户点击一个网页的头像，该网页没有做头像更换的功能，所以希望可以返回一个调皮一点、活泼一点的信息来进行用户反馈，可以参考下面几句信息：'
-        f'[“没有了哦”，“真的没有啦！”，“真的真的没有啦！”，“今天也要开心哦”，“发现你在偷懒咯”，“好好学习，天天向上”，“要生气啦”，'
+        f'[“没有了哦”，“真的没有啦！”，“真的真的没有啦！”，“今天也要开心哦”，“发现你在偷懒咯”，“好好学习，天天向上”，“再点就要生气啦”，'
         f'“嘘，偷偷告诉你，妈妈在你后面”，“今天也要好好学习”，“累了就去休息叭”，“我今天也在等你哦”，“你爱学习！”]'
         f'请生成这样的一句信息，并将回答以字典的形式进行返回，回答对应的键为“message”。'
         f'生成类似这样的带有祝福性质或轻松玩笑性质的信息。'
