@@ -27,8 +27,10 @@
     <!-- 题目设置 -->
     <span class="page-title" style="margin-top: 30px;">题型设置</span>
     <hr style="border-top: 1px solid #cdcdcd; margin-top: 5px;">
-    <!-- 题型数量设置 -->
+    <!-- 题型数量设置
     <div class="checkbox-container" style="border-bottom: 1px solid gray; padding-bottom: 20px;">
+    -->
+    <div class="checkbox-container" style="padding-bottom: 20px;">
       <!-- 选择题 -->
       <div class="checkbox-row">
         <input type="checkbox" id="multiple-choice" class="select-box" v-model="isSelectSelected">

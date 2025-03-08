@@ -110,7 +110,7 @@ def read_data(setting, request):
         # print(path)
         with open(path, encoding='utf-8') as file:
             file_data = json.load(file)
-        return path, file_data, file_data['common_topic'], random.sample(file_data['questions'], 5)
+        return path, file_data, file_data['common_topic'], random.sample(file_data['questions'], 10)
     # 综合测试
     else:
         root = os.getcwd() + '/myapp/dataset'
@@ -124,7 +124,7 @@ def read_data(setting, request):
         print(path)
         with open(path, encoding='utf-8') as file:
             file_data = json.load(file)
-        return path, file_data, file_data['common_topic'], random.sample(file_data['questions'], 5)
+        return path, file_data, file_data['common_topic'], random.sample(file_data['questions'], 10)
 
 
 # 将新出的题保存到数据库中
