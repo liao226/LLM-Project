@@ -224,8 +224,11 @@
       </div>
       <!-- 提交按钮 -->
       <div style="display: flex; justify-content: flex-end; margin-top: 50px;">
-        <a-button class="generate-button" size="large" @click="correct" style="margin-right: 30px;"> 提交
-        </a-button>
+        <a-popconfirm title="确定要提交吗?" ok-text="确定" cancel-text="取消"
+                      @confirm="correct">
+          <a-button class="generate-button" size="large" style="margin-right: 30px;"> 提交
+          </a-button>
+        </a-popconfirm>
         <a-popconfirm title="重做会清空之前的答题信息，确定要重做吗?" ok-text="确定" cancel-text="取消"
                       @confirm="reAnswer">
           <a-button class="generate-button" size="large" style="margin-right: 30px;"> 重答

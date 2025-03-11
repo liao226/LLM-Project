@@ -246,8 +246,11 @@
       </div>
       <!-- 底部按钮 -->
       <div style="display: flex; justify-content: flex-end; margin-top: 50px;">
-        <a-button class="generate-button" size="large" @click="correct" style="margin-right: 30px;"> 提交
-        </a-button>
+        <a-popconfirm title="确定要提交吗?" ok-text="确定" cancel-text="取消"
+                      @confirm="correct">
+          <a-button class="generate-button" size="large" style="margin-right: 30px;"> 提交
+          </a-button>
+        </a-popconfirm>
         <a-popconfirm title="重做会清空之前的答题信息，确定要重做吗?" ok-text="确定" cancel-text="取消"
                       @confirm="reAnswer">
           <a-button class="generate-button" size="large" style="margin-right: 30px;"> 重答
@@ -299,7 +302,7 @@
           应答题
         </label>
       </div>
-      <p style="font-size: 18px; margin-top: 20px;">请输入题号（题目前的序号）：</p>
+      <p style="font-size: 18px; margin-top: 20px;">请输入题号（题目前面的标号）：</p>
       <input type="number"
              style="margin-left: 50px; width: 150px; height: 40px; font-size: 18px; border: 1px solid gray; padding: 8px; border-radius: 5px;"
              placeholder="请输入数字" v-model="modal.question_id"/>
