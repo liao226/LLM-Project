@@ -453,6 +453,7 @@ const initData = () => {
   getMutiEssayApi({username: userStore.user_name, index: index}).then((res) => {
     questions.essayList = questions.essayList.concat(res.data);
   });
+  // 获取用户分数
   getUserScoreApi({username: userStore.user_name, index: index}).then((res) => {
     if (res.data) {
       questions.totalScore = res.data['total_score'];
@@ -471,9 +472,9 @@ onMounted(() => {
   getIndexApi({username: userStore.user_name, question_type: '单元测试'}).then((res) => {
     index = res.data['index'];
     initData();
-    // 更新总分，防止中意外导致总分不对
+    // 更新总分和用户得分，防止出题意外中断导致总分不对
     updateTotalScoreApi({'username': userStore.user_name, 'index': index});
-    updateUserScoreApi({'username': userStore.user_name, 'index': index});
+    updateUserScoreApi({'username': userStore.user_name, 'index': index, 'flag': 'no'});  // flag用于判断是否需要系统评论
     getUserScoreApi({username: userStore.user_name, index: index}).then((res) => {
       if (res.data) {
         questions.totalScore = res.data['total_score'];
@@ -625,6 +626,7 @@ const generateQuestions = async () => {
     if (settings.value.isEssaySelected) {
       await generateEssay();
     }
+    // 出题后更新总分
     await updateTotalScoreApi({'username': userStore.user_name, 'index': index});
   } catch (error) {
     console.error(error);
@@ -744,6 +746,7 @@ const updateEssayComment = async () => {
   }
 }
 
+// 判题
 const correct = async () => {
   try {
     clearCommentList();  // 清空原有判题评论信息
@@ -766,7 +769,7 @@ const correct = async () => {
     }
     // 打分
     await updateTotalScoreApi({'username': userStore.user_name, 'index': index});  // 更新总分，防止出题中断导致总分为 0
-    await updateUserScoreApi({'username': userStore.user_name, 'index': index});
+    await updateUserScoreApi({'username': userStore.user_name, 'index': index, 'flag': 'yes'});
     await getUserScoreApi({username: userStore.user_name, index: index}).then((res) => {
       if (res.data) {
         questions.totalScore = res.data['total_score'];

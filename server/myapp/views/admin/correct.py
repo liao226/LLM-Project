@@ -137,7 +137,10 @@ def update_user_score(request):
     record.user_score = (record.select_score + record.judge_score + record.fill_score
                          + record.calculate_score + record.essay_score)
 
-    record.comment = get_record_comment(record.total_score, record.user_score)['comment']
+    # 获取评价
+    if request.data['flag'] == 'yes':
+        record.comment = get_record_comment(record.total_score, record.user_score)['comment']
+    # 记录保存
     record.save()
 
     return APIResponse(code=0, message='批改结束')
