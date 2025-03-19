@@ -121,18 +121,39 @@ def update_pwd(request):
 
 @api_view(['POST'])
 def update_username(request):
+    # 查找用户
     user = User.objects.get(username=request.data['username'])
+    new_user = User.objects.filter(username=request.data['new_username'])
 
-    data = request.data.copy()
-    data.update({'username': request.data['new_username']})
-    serializer = UserSerializer(user, data=data)
-    if serializer.is_valid():
-        serializer.save()
-        return APIResponse(code=0, message='账户名修改成功', data=serializer.data)
+    if len(new_user) <= 0:  # 新账号名未注册
+        # 更新设置表
+        setting = Setting.objects.get(username=request.data['username'])
+        setting.username = request.data['new_username']
+        setting.save()
+        # 更新出题记录
+        GenerateRecord.objects.filter(username=request.data['username']).update(
+            username=request.data['new_username'])
+        # 更新题目表
+        SelectQuestion.objects.filter(username=request.data['username']).update(username=request.data['new_username'])
+        JudgeQuestion.objects.filter(username=request.data['username']).update(username=request.data['new_username'])
+        FillQuestion.objects.filter(username=request.data['username']).update(username=request.data['new_username'])
+        CalculateQuestion.objects.filter(username=request.data['username']).update(
+            username=request.data['new_username'])
+        EssayQuestion.objects.filter(username=request.data['username']).update(username=request.data['new_username'])
+
+        # 更新用户表
+        data = request.data.copy()
+        data.update({'username': request.data['new_username']})
+        serializer = UserSerializer(user, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return APIResponse(code=0, message='账户名修改成功', data=serializer.data)
+        else:
+            print(serializer.errors)
+    elif request.data['username'] == request.data['new_username']:  # 新账号名与旧账号相同
+        return APIResponse(code=1, message='该用户名与旧用户名一致')
     else:
-        print(serializer.errors)
-
-    return APIResponse(code=1, message='更新失败')
+        return APIResponse(code=1, message='该用户名已存在')
 
 
 @api_view(['POST'])
