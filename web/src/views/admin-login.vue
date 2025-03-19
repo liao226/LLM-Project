@@ -4,7 +4,7 @@
     <!-- 头部信息，包括 logo 和标题 -->
     <div class="user-layout-header">
       <img class="logo" :src="logoImage" alt="">
-      <span>小学数学出题系统</span>
+      <span>小学数学出题与判题系统</span>
     </div>
     <!-- 登录 -->
     <div class="main-container">

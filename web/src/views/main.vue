@@ -6,7 +6,7 @@
         style="position: fixed; width: 100%; padding: 0; z-index: 1000; border-bottom: 1px solid gray; background: #d3dffa;">
       <div class="header">
         <img class="header-logo" :src="logo" alt="">
-        <span class="header-title" style="color: #000c17">小学数学出题系统</span>
+        <span class="header-title" style="color: #000c17">小学数学出题与判题系统</span>
         <div class="empty"></div>
         <img class="default-avatar" :src="avatar" alt="" @click="changePersonal">
         <span style="font-weight: bold"> {{ userStore.user_name }} </span>
