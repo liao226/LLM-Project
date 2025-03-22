@@ -207,12 +207,10 @@ def get_question_comment(question, solution, user_answer, comment):
 
     prompt = (
         f'有一道数学题，题目为{question}，该题记录的答案为{solution}，用户的答案为{user_answer}，题目的解析为{comment}，'
-        f'要求返回的结果是一个字典，字典内容包括结合原有的解析，并且在原有解析的基础上进行修正，重新生成的新的解析“comment”，以及一个“flag”标记用户答案是否正确。'
-        f'“comment”中说明题目的计算过程，解析格式为：“解析：...”，三个点的位置表示具体返回的解析。'
-        f'如果用户答案只写了类似于“解：”“答：”的内容，而没有计算结果（指的是数字或文字表示的计算结果），应该判定为答案错误，flag的值为false。'
-        f'如果用户的答案为空，或者用户的计算结果不正确，都判定为答案错误，flag的值为false。'
+        f'要求返回的结果是一个字典，字典内容包括结合原有的解析，以及一个“flag”标记用户答案是否正确。'
+        f'如果用户答案只写了类似于“解：”“答：”的内容，而没有计算结果（指的是数字或文字表示的计算结果），应该判定为答案错误，“flag”的值为false。'
+        f'如果用户的答案为空，或者用户的计算结果不正确，都判定为用户答案错误，“flag”的值为false。'
         f'对比用户的答案和题目答案，如果用户的答案表达的意思与题目答案一致，则“flag”的值为字符串true，否则“flag”值为字符串false，字符串字母均为小写。'
-        f'另外，在生成的解析中说明为什么这样判断用户的答案。'
         f'仅返回一个字典，不需要添加任何额外的文字，也不需要保留任何类似json或python的格式提示字段和说明。'
     )
 
@@ -237,6 +235,9 @@ def get_question_comment(question, solution, user_answer, comment):
             or user_answer == ''):
         data['flag'] = 'false'
         print(data)
+
+    # 错题添加至数据库
+    # 。。。
 
     return data
 

@@ -22,9 +22,9 @@ def generate_select(request):
             # 选择题
             select_prompt = (
                 f'假如你是一名小学数学老师，你幽默风趣，认真教学，喜欢鼓励和夸奖学生帮助学生进步。你希望出几道题目帮助学生学习，在生成题目答案的过程，'
-                f'你会反复验算核对以保证题目的答案是正确的。'
+                f'你会反复验算核对以保证题目的解析和答案是正确的'
                 f'有数学知识点{topic}，该知识点有几道相应的题目及其答案{questions}。请根据这个知识点，以及和该知识点有关的这几道数学题目{questions}，'
-                f'另外出一道与例题难度类似的数学题，但是希望出的题目要有点变通，不要太单一。返回的回答全部使用gbk编码方式编码。'
+                f'另外出一道与例题难度类似的数学题，但是希望出的题目要有变通，不是简单的替换题目中的物品和数据。返回的回答全部使用gbk编码方式编码。'
                 f'要求题目中如果涉及类似于书本等不可拆分成小数份的物品，就不要写成小数份的，例如不能有0.8本书这样的描述。'
                 f'但是像水果、蔬菜、水电这样不一定要求是整数的，就可以有相应的小数的表示。'
                 f'要求题目的格式为字典形式，字典的键和值均用双引号包裹，返回的字典包含的键值包括所出的题目“question”，'
@@ -202,7 +202,7 @@ def generate_essay(request):
             essay_response = process_response(data, request.data['username'], request.data['index'])
 
             # 将生成的题目保存到原数据库中
-            save_data(file_path, file_data, essay_response)
+            # save_data(file_path, file_data, essay_response)
 
             essay_serializer = EssaySerializer(data=essay_response)
             if essay_serializer.is_valid():
