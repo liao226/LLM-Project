@@ -601,7 +601,7 @@ const correct = async () => {
     await updateEssayComment();
     // 打分
     await updateTotalScoreApi({'username': userStore.user_name, 'index': modal.index});  // 更新总分，防止出题中断导致总分为 0
-    await updateUserScoreApi({'username': userStore.user_name, 'index': modal.index});
+    await updateUserScoreApi({'username': userStore.user_name, 'index': modal.index, 'flag': 'yes'});
     await getUserScoreApi({username: userStore.user_name, index: modal.index}).then((res) => {
       if (res.data) {
         questions.totalScore = res.data['total_score'];

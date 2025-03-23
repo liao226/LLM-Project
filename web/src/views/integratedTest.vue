@@ -706,7 +706,7 @@ const correct = async () => {
     }
     // 打分
     await updateTotalScoreApi({'username': userStore.user_name, 'index': index});
-    await updateUserScoreApi({'username': userStore.user_name, 'index': index});
+    await updateUserScoreApi({'username': userStore.user_name, 'index': index, 'flag': 'yes'});
     await getUserScoreApi({username: userStore.user_name, index: index}).then((res) => {
       if (res.data) {
         questions.totalScore = res.data['total_score'];
