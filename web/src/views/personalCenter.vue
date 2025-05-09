@@ -87,6 +87,32 @@
       </div>
     </div>
 
+    <!-- 系统评分 -->
+    <span class="page-title" style="margin-top: 30px;">系统评分</span>
+    <hr style="border-top: 1px solid #cdcdcd; margin-top: 5px;">
+    <div class="space" style="height: 20px;"></div>
+    <div class="rating" @mouseleave="resetStars">
+      <span
+          v-for="star in stars"
+          :key="star.value"
+          class="star"
+          :class="{ 'star-selected': star.selected }"
+          @mouseover="hoverStar(star.value)"
+          @click="selectStar(star.value)"
+      >
+        &#9733;
+      </span>
+    </div>
+    <div class="space" style="height: 20px;"></div>
+    <div class="feedback" style="display: flex; align-items: flex-end;">
+      <textarea style="width: 800px; height: 150px; font-size: 18px; padding: 10px;"
+                placeholder="请输入反馈信息"></textarea>
+      <a-button size="large" @click="submit"
+                style="margin-left: 50px; width: 80px; font-weight: bold; color: #ffffff; background: #1E90FF;">
+        提交
+      </a-button>
+    </div>
+
     <!-- 系统介绍
     <span class="page-title" style="margin-top: 30px;">系统介绍</span>
     <hr style="border-top: 1px solid #cdcdcd; margin-top: 5px;">
@@ -456,6 +482,41 @@ const deleteUser = () => {
   })
 }
 
+// 提交评分，没写完
+const submit = () => {
+  message.success('感谢您的评分与反馈！')
+}
+
+// 系统评分
+const stars = [
+  {value: 1, selected: false},
+  {value: 2, selected: false},
+  {value: 3, selected: false},
+  {value: 4, selected: false},
+  {value: 5, selected: false}
+];
+
+// 定义选中的评分
+let selectedRating = 0;
+const resetStars = () => {
+  stars.forEach(star => {
+    star.selected = star.value <= selectedRating;
+  });
+}
+
+const hoverStar = (value: number) => {
+  stars.forEach(star => {
+    star.selected = star.value <= value;
+  });
+}
+
+const selectStar = (value: number) => {
+  selectedRating = value;
+  stars.forEach(star => {
+    star.selected = star.value <= value;
+  });
+}
+
 </script>
 
 <style scoped lang="less">
@@ -559,4 +620,20 @@ const deleteUser = () => {
   }
 }
 
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 8px;
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+.star-selected {
+  color: #f5ce05;
+}
 </style>
